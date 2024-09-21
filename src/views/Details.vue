@@ -1,27 +1,27 @@
 <template>
-    <div v-if="error">
-        {{ error }}
-
-    </div>
-    <div v-if="post" class="post">
-        <h3>{{ post.title }}</h3>
-        <p class="pre">{{ post.body }}</p>
-    </div>
-  
+  <div v-if="error">
+    {{ error }}
+  </div>
+  <div v-if="post" class="post">
+    <h3>{{ post.title }}</h3>
+    <p class="pre">{{ post.body }}</p>
+  </div>
 </template>
 
-<script>
-import getPost from '../../composables/getPost';
+<script setup>
+import { onMounted } from "vue";
+import getPost from "../composables/getPosts";
+import { ref } from "vue";
 
-export default {
-    props:['id'],
-    setup(props){
-        const{post,error,load}=getPost(props.id)
-        load()
-        return {post,error}
-    }
+const props = defineProps(["id"]);
 
-}
+const { post, error, load } = getPost(props.id);
+
+onMounted(async () => {
+  await load();
+  post.value = post.value;
+  error.value = error.value;
+});
 </script>
 
 <style scoped>
@@ -40,7 +40,7 @@ h3 {
 }
 
 .pre {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   white-space: pre-wrap;
   line-height: 1.6;
   color: #555;

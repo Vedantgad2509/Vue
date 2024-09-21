@@ -1,28 +1,22 @@
 <template>
   <div class="home">
-      <h1>Home </h1>
+    <h1>Home</h1>
     <div v-if="error">
-
-       {{ error }}
-    </div>  
-    <PostList :posts="posts"/>
+      {{ error }}
+    </div>
+    <post-list :posts="posts" />
   </div>
 </template>
 
-<script>
-import PostList from '@/components/PostList.vue';
-import { ref } from 'vue';
-import getPosts from '../../composables/getPosts';
-export default{
+<script setup>
+import PostList from "@/components/PostList.vue";
+import { ref } from "vue";
+import getPosts from "@/composables/getPosts";
+import { onMounted } from "vue";
 
-  name:'Home',
-  components:{PostList},
-  setup(){
-      const {posts,error,load}=getPosts()
-      load()
-    return {posts,error}
+const { posts, error, load } = getPosts();
 
-  }
-
-}
-</script> 
+onMounted(async () => {
+  await load();
+});
+</script>
