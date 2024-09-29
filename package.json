@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.2",
+    "metascraper": "^5.45.23",
+    "metascraper-image": "^5.45.22",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
