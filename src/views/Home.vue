@@ -5,6 +5,7 @@
       {{ error }}
     </div>
     <post-list :posts="posts" />
+    <meta-data />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import PostList from "@/components/PostList.vue";
 import { ref } from "vue";
 import getPosts from "@/composables/getPosts";
 import { onMounted } from "vue";
+import MetaData from "@/components/MetaData.vue";
 
 const { posts, error, load } = getPosts();
 
